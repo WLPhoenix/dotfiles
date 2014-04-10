@@ -1,0 +1,22 @@
+# Default path
+PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+# Machine specific paths
+PATH="$PATH:/usr/games:/usr/local/games"
+
+# Library specific paths
+PATH="$PATH:/usr/lib/lightdm/lightdm:/usr/lib/postgresql/9.1/bin:/usr/local/packer"
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$HOME/bin/qatp:$PATH"
+fi
+
+export PATH
+
+export HG_EXTENSIONS_HOME="$HOME/Unix/Mercurial/Extensions";
+
+# virtualenvwrapper
+export WORKON_HOME="/venv"
+export PIP_VIRTUALENV_BASE=$WORKON_HOME
+export PIP_RESPECT_VIRTUALENV=true
