@@ -48,9 +48,10 @@ source $ZSH/oh-my-zsh.sh
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-# ssh
-export SSH_KEY_PATH="~/.ssh/id_rsa"
-
+# Setup variables and paths
+if [ -f "$HOME/.mypaths" ]; then
+    source "$HOME/.mypaths"
+fi
 
 # User configuration
 # some more ls aliases

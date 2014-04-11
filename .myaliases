@@ -10,7 +10,7 @@ alias curl-nexus="curl -1 -O -u cory.hughes";
 
 alias django="python manage.py";
 
-alias e="emacsclient -t";
+alias e="emacsclient --alternate-editor="" -t";
 ef () { emacsclient -t $(find . -name "$1"); };
 alias en="emacsclient -nt";
 alias emacs="emacs -nw";
