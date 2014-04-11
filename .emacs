@@ -3,7 +3,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defun install-if-not (pkg)
   "Install the package if it's not initialized"
-  (unless (require pkg) (package-install pkg)))  
+  (unless (require pkg) (package-install pkg)))
 
 (defun mkdir-if-not (dir)
   "Make directory if it doesn't exist"
@@ -16,7 +16,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                                 Imports                                    ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(setq require-packages 
+(setq require-packages
   '(
     circe
     groovy-mode
@@ -35,7 +35,7 @@
 ;;; ELPA packages
 (when (>= emacs-major-version 24)
   (require 'package)
-  (setq package-archives 
+  (setq package-archives
 	'(
 	  ("gnu" . "http://elpa.gnu.org/packages/")
 	  ("marmalade" . "http://marmalade-repo.org/packages/")
@@ -54,7 +54,7 @@
   "Format JSON in region by piping to python's json.tool"
   (interactive)
   (save-excursion
-    (shell-command-on-region (mark) (point) "python -m json.tool" (buffer-name) t)
+    (shell-command-on-region (mark) (point) "python -m json.tool" (buffer-name) t)n
   )
 )
 
@@ -78,7 +78,7 @@
 (defun move-to-center-column ()
   "Moves the point to the center of the current line"
   (interactive)
-  (let 
+  (let
     ((line-len (save-excursion (end-of-line) (current-column))))
   (move-to-column (/ line-len 2))
 ))
@@ -105,6 +105,13 @@
 	          mark-active)
           (kill-region (region-beginning) (region-end))
         (backward-delete-word arg)))
+
+(defun keyring (ring user)
+  "Returns a password from the keyring"
+  (interactive)
+  (insert ring user))
+
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                               Global modes                                 ;;
@@ -172,17 +179,19 @@
 
 ;;; Python config
 (setq
- python-shell-interpreter "ipython"
- python-shell-interpreter-args ""
- python-shell-prompt-regexp "In \\[[0-9]+\\]: "
- python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: "
- python-shell-completion-setup-code
-   "from IPython.core.completerlib import module_completion"
- python-shell-completion-module-string-code
-   "';'.join(module_completion('''%s'''))\n"
- python-shell-completion-string-code
-   "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")
+  python-shell-interpreter "ipython"
+  python-shell-interpreter-args ""
+  python-shell-prompt-regexp "In \\[[0-9]+\\]: "
+  python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: "
+  python-shell-completion-setup-code
+    "from IPython.core.completerlib import module_completion"
+  python-shell-completion-module-string-code
+    "';'.join(module_completion('''%s'''))\n"
+  python-shell-completion-string-code
+    "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")
 
+;;; Hooks
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                       Secure/Hidden/Client-specific                        ;;
