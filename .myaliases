@@ -1,6 +1,6 @@
 #!/bin/sh
 
-alias #l="wc -l";
+alias '#l'="wc -l";
 
 alias a='ack-grep'
 
@@ -39,8 +39,13 @@ alias py="ipython";
 
 alias servedir="python -m SimpleHTTPServer";
 
-workon_and_cd_venv () { if [ $1 ]; then workon "$1"; fi; cdproject; }
-alias v.cd='workon_and_cd_venv'
+workon-and-cd () { 
+    if $1; then 
+	workon $1; 
+    fi;
+    cdproject;
+};
+alias v.cd=workon-and-cd
 alias v.cd-root='cdvirtualenv'
 alias v.d='deactivate'
 alias v.ls='lsvirtualenv'
